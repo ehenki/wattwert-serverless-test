@@ -1,0 +1,65 @@
+# Environment variables
+.env
+.env.*
+
+# Aufmass main - contains sensitive tokens
+aufmass_core/aufmass_main.py
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+ENV/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Ignore contents of any LOD2/Laser directory at any depth
+**/LOD2/**
+!**/LOD2/
+**/Laser/**
+!**/Laser/
+
+# Keep a placeholder so Git can track the directories
+!**/LOD2/.gitkeep
+!**/Laser/.gitkeep
+
+# DIN 4108-6 results folder - show folder but ignore contents
+DIN\ 4108-6/results/*
+!DIN\ 4108-6/results/
+!DIN\ 4108-6/results/.gitkeep
+
+# Massnahmensimulierer reports - ignore generated reports
+Massnahmensimulierer/reports/*
+!Massnahmensimulierer/reports/
+!Massnahmensimulierer/reports/.gitkeep
+
+# reports
+reports/*
+Energiebilanzierung/DIN_4108_6/results/*
+
+# Big Segmentation model
+wattwert_only_mtl/data/trained_mtl_simult.pth

@@ -1,0 +1,65 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  background-color: var(--background);
+}
+
+.content {
+  width: 100%;
+  max-width: 500px;
+  padding: 32px;
+  background-color: var(--background);
+  border: 1px solid var(--base-grey);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.title {
+  font-family: var(--font-noto-sans);
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--fontcolor);
+  text-align: center;
+  margin: 0;
+}
+
+.subtitle {
+  text-align: center;
+  color: var(--fontcolor);
+  margin: 0;
+}
+
+.buttonGroup {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two columns */
+  gap: 16px;
+}
+
+.buttonGroup button:not([disabled]):hover {
+  transform: scale(1.02);
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.roleButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px; /* Space between icon and text */
+  height: 84px; /* Double the vertical size */
+  padding: 12px 20px; /* Adjust padding as needed */
+  text-align: center; /* Center the text */
+}
+
+.roleButton span {
+  flex-grow: 0; /* Remove flex-grow */
+  text-align: center; /* Center the text */
+}
+

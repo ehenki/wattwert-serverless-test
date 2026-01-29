@@ -1,0 +1,264 @@
+classDiagram
+    class Gebaeude {
+        +String ID_LOD2
+        ```plaintext
+        classDiagram
+
+            class Gebaeude {
+                +String ID_LOD2
+                +String name
+                +String standort
+                +float coordinates_N
+                +float coordinates_E
+                +int baujahr
+                +float beheiztes_bruttovolumen
+                +String bauart
+                +int num_units
+                +String owner_role
+                +String building_class
+                +float floor_area_factor
+                +float air_volume_factor
+                +Optional~float~ living_area
+                +Optional~float~ nutzflaeche
+                +Optional~float~ ground_area
+                +Optional~int~ heated_floors
+                +Optional~String~ roof_type_name
+                +Optional~float~ building_height
+                +bool heated_attic
+                +bool heated_basement
+                +String heating_system
+                +String warmwater
+                +dict u_values_used
+                +Optional~float~ volume_model
+                +Optional~float~ volume_basement
+                +Optional~float~ volume_attic
+            }
+
+            class Facade {
+                +String ID_LOD2
+                +String facade_id
+                +String TABLE_NAME
+                +Optional~float~ scale_factor
+                +bool image_processed
+                +Polygon2D surface_2d
+                +Polygon3D surface_3d
+                +list~int~ material_ids
+                +list~float~ material_fractions
+                +Optional~float~ max_height
+                +Optional~float~ eave_length
+                +Optional~String~ direction
+                +Optional~float~ area
+                +Optional~float~ wwr
+            }
+
+            class Opening {
+                +String ID_LOD2
+                +String facade_id
+                +String opening_id
+                +String type
+                +Polygon2D surface_2d
+                +Polygon3D surface_3d
+                +float area
+                +float height
+                +float width
+                +float laibung_depth
+                +float deviation_from_raw_segmentation
+                +String TABLE_NAME
+            }
+
+            class Window {
+                +String material_id
+                +String TABLE_NAME
+            }
+
+            class Door {
+                +int material_id
+                +String TABLE_NAME
+            }
+
+            class GarageDoor {
+                +int material_id
+                +String TABLE_NAME
+            }
+
+            class OpeningAccessory {
+                +String ID_LOD2
+                +String facade_id
+                +String opening_id
+                +String accessory_id
+                +String type
+                +Polygon2D surface_2d
+                +Polygon3D surface_3d
+                +float area
+                +float height
+                +float width
+                +float deviation_from_raw_segmentation
+                +String TABLE_NAME
+            }
+
+            class WallSection {
+                +String ID_LOD2
+                +String facade_id
+                +String wall_section_id
+                +String type
+                +Polygon2D surface_2d
+                +Polygon3D surface_3d
+                +float area
+                +float height
+                +float width
+                +int material_id
+                +float deviation_from_raw_segmentation
+                +String TABLE_NAME
+            }
+
+            class Protrusion {
+                +float depth
+                +String TABLE_NAME
+            }
+
+            class RoofOverhang {
+                +String ID_LOD2
+                +String facade_id
+                +String roof_overhang_id
+                +float area
+                +float length
+                +float width
+                +int material_id
+                +String TABLE_NAME
+            }
+
+            class FacadeAttachment {
+                +String ID_LOD2
+                +String facade_id
+                +String facade_attachment_id
+                +String type
+                +Polygon2D surface_2d
+                +Polygon3D surface_3d
+                +float area
+                +float depth
+                +float height
+                +float width
+                +int material_id
+                +float deviation_from_raw_segmentation
+                +String TABLE_NAME
+            }
+
+            class FacadeEdge {
+                +String ID_LOD2
+                +String facade_id
+                +String edge_id
+                +String edge_type
+                +tuple~Point2D,Point2D~ geometry_2d
+                +tuple~Point3D,Point3D~ geometry_3d
+                +float length
+                +String TABLE_NAME
+            }
+
+            class SegmentationMask {
+                +String ID_LOD2
+                +String facade_id
+                +String mask_id
+                +list~str~ tags
+                +any mask
+                +String TABLE_NAME
+            }
+
+            class FacadeImage {
+                +String ID_LOD2
+                +String facade_id
+                +list~str~ tags
+                +Optional~String~ title
+                +Optional~String~ storage_path
+                +Optional~String~ public_url
+                +Optional~int~ size_bytes
+                +Optional~int~ width
+                +Optional~int~ height
+                +String TABLE_NAME
+            }
+
+            class FacadeMeasurement {
+                +String ID_LOD2
+                +String building_measurement_id
+                +String facade_id
+                +String facade_measurement_id
+                +float area_facade_total
+                +float area_wall_real
+                +float area_wall_VOB
+                +float area_windows_real
+                +float area_windows_VOB
+                +float area_doors_real
+                +float area_doors_VOB
+                +float area_base_real
+                +float area_base_VOB
+                +float area_attachments_real
+                +float area_attachments_VOB
+                +float area_protrusions_real
+                +float area_protrusions_VOB
+                +int count_windows
+                +int count_doors
+                +int count_base
+                +int count_attachments
+                +int count_protrusions
+                +float laibung_length_total
+                +float laibung_area_total
+                +float roof_overhang_area_total
+                +String TABLE_NAME
+            }
+
+            class BuildingMeasurement {
+                +String ID_LOD2
+                +String building_measurement_id
+                +float area_wall_VOB
+                +float area_windows_VOB
+                +float area_doors_VOB
+                +float area_base_VOB
+                +float area_attachments_VOB
+                +float area_protrusions_VOB
+                +float laibung_length_total
+                +float laibung_area_total
+                +float roof_overhang_area_total
+                +String TABLE_NAME
+            }
+
+            class Offer {
+                +String ID_LOD2
+                +String gebaeudeaufmass_id
+                +String angebot_id
+                +float scaffolding_price
+                +float cleaning_price
+                +float undercoat_price
+                +float covering_price
+                +float connectors_price
+                +float paint_price
+                +float plaster_price
+                +float insulation_price
+                +float total_price
+                +String TABLE_NAME
+            }
+
+            %% Inheritance
+            Opening <|-- Window
+            Opening <|-- Door
+            Opening <|-- GarageDoor
+            WallSection <|-- Protrusion
+
+            %% Relationships
+            Gebaeude "1" --> "*" Facade : contains
+            Gebaeude "1" --> "*" BuildingMeasurement : has
+
+            Facade "1" --> "*" Opening : contains
+            Facade "1" --> "*" WallSection : contains
+            Facade "1" --> "*" RoofOverhang : contains
+            Facade "1" --> "*" FacadeAttachment : contains
+            Facade "1" --> "*" FacadeEdge : contains
+            Facade "1" --> "*" SegmentationMask : has
+            Facade "1" --> "*" FacadeImage : has
+            Facade "1" --> "*" FacadeMeasurement : measured_in
+
+            BuildingMeasurement "1" --> "*" FacadeMeasurement : contains
+            BuildingMeasurement "1" --> "*" Offer : has
+
+            Opening "1" --> "*" OpeningAccessory : has
+
+        ```
+        +float area_protrusions_real

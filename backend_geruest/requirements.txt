@@ -1,0 +1,73 @@
+# run with pip install -r requirements.txt
+#simple plus works on python 3.11.14
+
+# Standard libraries (do not need to be installed via pip):
+# - xml.etree.ElementTree
+# - os
+# - zipfile
+# - time
+# - math
+# - importlib
+# - tkinter
+# - json
+
+# Installable packages:
+# For LOD2 data processing & database communication
+geopy
+utm
+requests
+httpx
+shapely
+numpy
+matplotlib
+laspy[laszip]
+scikit-learn>=1.5.2
+scikit-image>=0.20
+opencv-contrib-python>=4.8.0
+imageio>=2.31
+pillow>=9.0
+lensfunpy
+python-dotenv
+fastapi
+uvicorn
+supabase
+PyJWT
+pyproj
+python-multipart
+pandas
+plotly
+trimesh # May be responsible if docker build fails
+mapbox_earcut
+rtree
+truststore
+pip-system-certs
+
+
+# For MTL (Multi-Level Learning)
+torch
+torchvision
+albumentations
+evaluate
+tqdm
+pyyaml
+tensorboard
+
+# For DIN 4108-6
+plotly
+pytest
+
+# For SAM3 (Segment Anything Model 3)
+# Core SAM3 dependencies
+einops
+pycocotools
+fvcore>=0.1.5.post20221012
+timm
+omegaconf
+setuptools
+setuptools_scm
+ftfy
+regex
+huggingface_hub[cli]
+decord
+psutil
+# Nutzung des Sam3 Model benötigt authentifizierung bei Hugging face

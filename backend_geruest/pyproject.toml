@@ -1,0 +1,94 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wattwert-fassadenaufmass"
+version = "0.1.0"
+description = "Fassadenaufmass Backend Application"
+readme = "README.md"
+requires-python = ">=3.11,<3.13"
+dependencies = [
+    # Core ML frameworks (required by SAM3 and MTL)
+    "torch>=2.0.0",
+    "torchvision>=0.15.0",
+    
+    # For LOD2 data processing & database communication
+    "geopy",
+    "utm",
+    "requests",
+    "shapely",
+    "numpy==1.26.*",  # Required by SAM3 - using flexible patch version
+    "matplotlib",
+    "laspy[laszip]",
+    "scikit-learn>=1.5.2",
+    "scikit-image>=0.20",
+    "opencv-contrib-python>=4.8.0",
+    "imageio>=2.31",
+    "pillow>=9.0",
+    "lensfunpy",
+    "python-dotenv",
+    "fastapi",
+    "uvicorn",
+    "supabase",
+    "PyJWT",
+    "pyproj",
+    "python-multipart",
+    "pandas",
+    "plotly",
+    "trimesh",
+    "mapbox_earcut",
+    "rtree",
+    "truststore",  # Handles SSL certificates on Windows (replaces pip-system-certs)
+    "tqdm",  # Required by SAM3 and MTL
+    
+    # For SAM3 - matching exact versions from SAM3's pyproject.toml
+    "timm>=1.0.17",
+    "ftfy==6.1.1",
+    "regex",
+    "iopath>=0.1.10",
+    "typing_extensions",
+    "huggingface_hub",
+    "einops",
+    "pycocotools",
+    "decord",  # Required by SAM3 for video support
+    "psutil",  # Required by SAM3 for system monitoring
+]
+
+[project.optional-dependencies]
+mtl = [
+    # For MTL (Multi-Level Learning) - torch/torchvision now in main dependencies
+    "albumentations",
+    "evaluate",
+    "pyyaml",
+    "tensorboard",
+]
+test = [
+    # For DIN 4108-6 testing
+    "pytest",
+    "pytest-cov",
+]
+dev = [
+    # Development tools
+    "black",
+    "ruff",
+]
+all = [
+    "wattwert-fassadenaufmass[mtl,test,dev]",
+]
+
+[tool.setuptools]
+packages = ["aufmass_core"]
+
+# Installation instructions (Conda recommended):
+# 1. Create conda environment: conda create -n wattwert_fassadenaufmass python=3.11 -y
+# 2. Activate environment: conda activate wattwert_fassadenaufmass
+# 3. Install main package: pip install -e .
+# 4. Install SAM3: pip install -e ./aufmass_core/models/sam3
+# 5. Optional - MTL: pip install -e .[mtl]
+# 6. Optional - All extras: pip install -e .[all]
+#
+# Notes:
+# - Triton (CUDA acceleration) not available on Windows - CPU fallback is used
+# - SAM3 requires Hugging Face authentication: huggingface-cli login
+# - Standard libraries (os, json, etc.) are included in Python

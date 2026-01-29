@@ -1,0 +1,30 @@
+/* Scanning Animation */
+.scannerLine {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: var(--base-col1-hover);
+  top: 0;
+  z-index: 2;
+  pointer-events: none;
+  animation: scanMove 4s ease-in-out infinite alternate;
+  box-shadow: 0 0 8px var(--base-col1-hover);
+}
+
+.scannerHighlight {
+  position: absolute;
+  width: 100%;
+  background: color-mix(in srgb, var(--base-col1) 20%, #fff 80%);
+  opacity: 0.5;
+  bottom: 0;
+  top: 0;
+  z-index: 1;
+  pointer-events: none;
+  animation: scanMove 4s ease-in-out infinite alternate;
+}
+
+@keyframes scanMove {
+  0% { top: 0%; }
+  100% { top: 100%; }
+}
+

@@ -1,0 +1,28 @@
+services:
+  frontend:
+    build:
+      context: ./frontend
+    environment:
+      - NEXT_PUBLIC_API_URL=http://backend:8000
+    env_file:
+      - ./frontend/.env.production
+    ports:
+      - "3001:3000"
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./backend
+    env_file:
+      - ./backend/.env
+    environment:
+      - ALLOWED_ORIGINS=http://localhost:3001
+      - SAM3_COMPILE=true  # Enable torch.compile() for ~20% faster SAM3 inference (set to false for low RAM systems)
+    volumes: # Needed for mounting large LOD2 data folders on the server
+      - /mnt/HC_Volume_104334835/States_data_download/Hamburg/LOD2:/States_data_download/Hamburg/LOD2
+      - /mnt/HC_Volume_104334835/States_data_download/Sachsen-Anhalt/LOD2:/States_data_download/Sachsen-Anhalt/LOD2
+      - /mnt/HC_Volume_104334835/States_data_download/Hessen/LOD2:/States_data_download/Hessen/LOD2
+      - /mnt/HC_Volume_104334835/States_data_download/Bremen/LOD2:/States_data_download/Bremen/LOD2
+    ports:
+      - "8000:8000"
+    restart: unless-stopped

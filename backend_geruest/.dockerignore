@@ -1,0 +1,20 @@
+__pycache__
+*.pyc
+.git
+.gitignore
+Dockerfile
+.env*
+venv/
+
+# Ignore large data files by extension
+**/*.gml
+**/*.laz
+**/*.zip
+
+# Massive LOD2 data folders - do not dockerize, instead mount the folder as a volume
+States_data_download/Hessen/LOD2 
+States_data_download/Hamburg/LOD2
+States_data_download/Sachsen-Anhalt/LOD2
+States_data_download/Bremen/LOD2
+
+
