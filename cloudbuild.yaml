@@ -51,7 +51,7 @@ steps:
       - '--port=8003'
       - '--allow-unauthenticated'
       - '--network=default'
-      - '--set-env-vars=BACKEND_LOD_URL=${_BACKEND_LOD_URL}'
+      - '--set-env-vars=BACKEND_LOD2_URL=${_BACKEND_LOD2_URL}'
       - '--set-secrets=SUPABASE_URL=SUPABASE_URL:latest,SUPABASE_ANON_KEY=SUPABASE_ANON_KEY:latest,HF_TOKEN=HF_TOKEN:latest,DB_PASSWORD=wattwert-db-pw:latest'
 
   # ==========================================================
@@ -106,8 +106,8 @@ availableSecrets:
 substitutions:
   _REGION: europe-west1
   _NEXT_PUBLIC_API_URL: "https://wattwert-backend-geruest-placeholder-url.a.run.app"
-  _BACKEND_LOD_URL: "https://wattwert-backend-placeholder-url.a.run.app"
-
+  _BACKEND_LOD2_URL: "https://wattwert-backend-1049303488847.europe-west1.run.app"
+"
 options:
   logging: CLOUD_LOGGING_ONLY
 
