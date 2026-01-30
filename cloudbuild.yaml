@@ -92,7 +92,7 @@ availableSecrets:
       env: 'SUPABASE_ANON_KEY'
     - versionName: projects/$PROJECT_ID/secrets/MAPBOX_TOKEN/versions/latest
       env: 'MAPBOX_TOKEN'
-    - versionName: projects/$PROJECT_ID/secrets/RESEND_API_KEY/versions/latest
+    - versionName: projects/$PROJECT_ID/secrets/RESEND_KEY/versions/latest
       env: 'RESEND_KEY'
 
 substitutions:
