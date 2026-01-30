@@ -41,32 +41,6 @@ rtree
 truststore
 pip-system-certs
 
-
-# For MTL (Multi-Level Learning)
-torch
-torchvision
-albumentations
-evaluate
-tqdm
-pyyaml
-tensorboard
-
 # For DIN 4108-6
 plotly
 pytest
-
-# For SAM3 (Segment Anything Model 3)
-# Core SAM3 dependencies
-einops
-pycocotools
-fvcore>=0.1.5.post20221012
-timm
-omegaconf
-setuptools
-setuptools_scm
-ftfy
-regex
-huggingface_hub[cli]
-decord
-psutil
-# Nutzung des Sam3 Model benötigt authentifizierung bei Hugging face

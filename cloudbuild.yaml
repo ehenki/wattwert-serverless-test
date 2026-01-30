@@ -20,6 +20,7 @@ steps:
       - 'wattwert-backend'
       - '--image=$_REGION-docker.pkg.dev/$PROJECT_ID/wattwert-serverless-test-1/backend:latest'
       - '--region=${_REGION}'
+      - '--memory=2Gi'
       - '--port=8000'
       - '--ingress=internal'  
       - '--no-allow-unauthenticated'
