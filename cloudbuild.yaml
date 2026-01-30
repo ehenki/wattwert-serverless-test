@@ -111,7 +111,7 @@ substitutions:
   _BACKEND_LOD2_URL: "https://wattwert-backend-1049303488847.europe-west1.run.app"
   # This list of origins is passed to the backend-geruest to ALLOW requests from the frontend
   # Note: The frontend URL is what we expect here. It matches the frontend service URL.
-  _ALLOWED_ORIGINS: "http://localhost:3000,https://wattwert-frontend-1049303488847.europe-west1.run.app"
+  _ALLOWED_ORIGINS: "http://localhost:3000\,https://wattwert-frontend-1049303488847.europe-west1.run.app"
 
 options:
   logging: CLOUD_LOGGING_ONLY
