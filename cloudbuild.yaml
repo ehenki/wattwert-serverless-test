@@ -53,7 +53,7 @@ steps:
       - '--memory=2Gi' # Make sure we have enough memory to build with heavy libraries
       - '--allow-unauthenticated'
       - '--network=default'
-      - '--set-env-vars=BACKEND_LOD2_URL=${_BACKEND_LOD2_URL}'
+      - '--set-env-vars=BACKEND_LOD2_URL=${_BACKEND_LOD2_URL},ALLOWED_ORIGINS=${_ALLOWED_ORIGINS}'
       - '--set-secrets=SUPABASE_URL=SUPABASE_URL:latest,SUPABASE_ANON_KEY=SUPABASE_ANON_KEY:latest,HF_TOKEN=HF_TOKEN:latest'
 
   # ==========================================================
@@ -107,8 +107,11 @@ availableSecrets:
 
 substitutions:
   _REGION: europe-west1
-  _NEXT_PUBLIC_API_URL: "https://wattwert-backend-geruest-1049303488847.europe-west1.run.app/"
+  _NEXT_PUBLIC_API_URL: "https://wattwert-backend-geruest-1049303488847.europe-west1.run.app"
   _BACKEND_LOD2_URL: "https://wattwert-backend-1049303488847.europe-west1.run.app"
+  # This list of origins is passed to the backend-geruest to ALLOW requests from the frontend
+  # Note: The frontend URL is what we expect here. It matches the frontend service URL.
+  _ALLOWED_ORIGINS: "http://localhost:3000,https://wattwert-frontend-1049303488847.europe-west1.run.app"
 
 options:
   logging: CLOUD_LOGGING_ONLY

@@ -6,4 +6,4 @@ Dockerfile
 # keep secrets out; allow .env.production only
 .env*
 #  potential security risk - fix when we go into real production
-!.env.production
+.env.production
