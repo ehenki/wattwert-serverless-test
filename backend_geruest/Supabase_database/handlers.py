@@ -126,10 +126,15 @@ def insert_geom_data(geom_data: dict, access_token: str):
     # Insert or update geometry data - this function also turns lists and arrays into json data to be properly stored in the database
     # The input dict geom_data has to contain the ID_LOD2 of the building as a key
     user_supabase = get_user_client(access_token)
-    # Convert all numpy types (arrays, floats, ints) to native Python types 
-    # by round-tripping through JSON. We use json.loads() to get back Python objects
-    # (dicts, lists) so that the Supabase client deals with them as JSON objects/arrays, not as stringified JSON.
-    insert_data = json.loads(json.dumps(geom_data, cls=NumpyEncoder))
+    insert_data = geom_data
+    
+    # We do NOT manually decode the JWT or set user_id here.
+    # The database handles the user_id association automatically via default auth.uid()
+    # when using the authenticated client.
+
+    for key, value in insert_data.items():
+        if isinstance(value, list) or isinstance(value, np.ndarray):
+            insert_data[key] = json.dumps(value, cls=NumpyEncoder)
 
     try:
         # Check if record already exists for this ID_LOD2

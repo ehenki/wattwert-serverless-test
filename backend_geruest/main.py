@@ -3,7 +3,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import httpx
 import os
-from segmentation_handler import segment_all
 from Supabase_database.handlers import update_building_data
 from aufmass_core.aufmass_main import aufmass_main
 
@@ -111,21 +110,6 @@ async def geom_to_threejs(
 
 class SegmentationRequest(BaseModel):
     ID_LOD2: str
-
-@app.post("/api/segmentation")
-async def segmentation(
-    request: SegmentationRequest,
-    authorization: str | None = Header(None),
-):
-    # Ensure caller is authenticated
-    if not authorization or not authorization.startswith("Bearer "):
-        raise HTTPException(status_code=401, detail="Missing or invalid token")
-
-    access_token = authorization.split(" ", 1)[1]
-
-    result = segment_all(request.ID_LOD2, access_token)
-
-    return result
 
 class AufmassRequest(BaseModel):
     ID_LOD2: str

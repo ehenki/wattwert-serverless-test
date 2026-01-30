@@ -38,10 +38,8 @@ ENV/
 *.swo
 
 # Ignore contents of any LOD2/Laser directory at any depth
-**/LOD2/**
-!**/LOD2/
-**/Laser/**
-!**/Laser/
+**/LOD2/*
+**/Laser/*
 
 # Keep a placeholder so Git can track the directories
 !**/LOD2/.gitkeep
@@ -60,6 +58,3 @@ Massnahmensimulierer/reports/*
 # reports
 reports/*
 Energiebilanzierung/DIN_4108_6/results/*
-
-# Big Segmentation model
-wattwert_only_mtl/data/trained_mtl_simult.pth

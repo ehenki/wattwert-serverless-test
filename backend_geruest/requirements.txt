@@ -16,7 +16,6 @@
 geopy
 utm
 requests
-httpx
 shapely
 numpy
 matplotlib

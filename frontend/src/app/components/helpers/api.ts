@@ -38,26 +38,6 @@ export const submitAddress = async (data: any, accessToken: string) => {
   return await response.json();
 };
 
-export const runAnalysis = async (lod2Id: string, accessToken: string) => {
-  // Call segmentation API
-  const segmentationResponse = await fetch(`${config.apiUrl}/api/segmentation`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${accessToken}`
-    },
-    body: JSON.stringify({ ID_LOD2: lod2Id }),
-  });
-
-  if (!segmentationResponse.ok) {
-    const errorData = await segmentationResponse.json();
-    throw new Error(errorData.detail || 'Segmentation request failed');
-  }
-  const segmentationResult = await segmentationResponse.json();
-
-  return segmentationResult;
-};
-
 export const startAufmass = async (lod2Id: string, accessToken: string): Promise<void> => {
   try {
     const response = await fetch(`${config.apiUrl}/api/start_aufmass`, {
