@@ -1,6 +1,7 @@
 from fastapi import FastAPI, File, UploadFile, Form, Header, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+from api_helpers.gcp_auth import get_google_oidc_token
 import httpx
 import os
 from Supabase_database.handlers import update_building_data
@@ -61,13 +62,19 @@ async def process_address(
 ):
     if not authorization:
         raise HTTPException(status_code=401, detail="Missing or invalid token")
+    
+    # Get the Google OIDC token for the shared LOD2 backend service
+    google_token = get_google_oidc_token(BACKEND_URL)
 
     async with httpx.AsyncClient() as client:
         try:
             response = await client.post(
                 f"{BACKEND_URL}/api/address",
                 json=request.model_dump(),
-                headers={"Authorization": authorization},
+                headers={
+                    "Authorization": f"Bearer {google_token}", # Proof for Google
+                    "X-User-Token": authorization             # Original Supabase Bearer <token>
+                },
                 timeout=60.0
             )
             # Propagate status code and content
@@ -89,13 +96,17 @@ async def geom_to_threejs(
 ):
     if not authorization:
         raise HTTPException(status_code=401, detail="Missing or invalid token")
-        
+    
+    google_token = get_google_oidc_token(BACKEND_URL)
     async with httpx.AsyncClient() as client:
         try:
             response = await client.post(
                 f"{BACKEND_URL}/api/geom-to-threejs",
                 params={"ID_LOD2": ID_LOD2},
-                headers={"Authorization": authorization},
+                headers={
+                    "Authorization": f"Bearer {google_token}", # Proof for Google
+                    "X-User-Token": authorization             # Original Supabase Bearer <token>
+                },
                 timeout=60.0
             )
             if response.status_code != 200:

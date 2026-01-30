@@ -75,6 +75,7 @@ def return_address(street: str, number: str, city: str, state: str, country: str
 async def process_address(
     request: AddressRequest,
     authorization: str | None = Header(None),
+    x_user_token: str | None = Header(None) # Catch the forwarded user token
 ):
     """Process an address lookup and persist the resulting building row.
 
@@ -82,10 +83,14 @@ async def process_address(
     that the insert runs under that user's privileges (RLS enforced).
     """
 
-    if not authorization or not authorization.startswith("Bearer "):
-        raise HTTPException(status_code=401, detail="Missing or invalid token")
+    # Use the forwarded token if it exists (Cloud Run mode), 
+    # otherwise fallback to authorization (Local dev mode)
+    raw_token = x_user_token or authorization
 
-    access_token = authorization.split(" ", 1)[1]
+    if not raw_token or not raw_token.startswith("Bearer "):
+         raise HTTPException(status_code=401, detail="Missing or invalid token")
+
+    access_token = raw_token.split(" ", 1)[1]
 
     result = return_address(
         request.street,
@@ -147,31 +152,15 @@ async def process_address(
 async def geom_to_threejs(
     ID_LOD2: str,
     authorization: str | None = Header(None),
+    x_user_token: str | None = Header(None) # Catch the forwarded user token
 ):
-    # Ensure caller is authenticated
-    if not authorization or not authorization.startswith("Bearer "):
-        raise HTTPException(status_code=401, detail="Missing or invalid token")
-    access_token = authorization.split(" ", 1)[1]
+    # Use the forwarded token if it exists (Cloud Run mode), 
+    # otherwise fallback to authorization (Local dev mode)
+    raw_token = x_user_token or authorization
+
+    if not raw_token or not raw_token.startswith("Bearer "):
+         raise HTTPException(status_code=401, detail="Missing or invalid token")
+
+    access_token = raw_token.split(" ", 1)[1]
+
     return convert_to_threejs_from_database(ID_LOD2, access_token)
-
-@app.post("/api/buildingdetails")
-async def buildingdetails(
-    data:dict,
-    authorization: str | None = Header(None),
-):
-    # Ensure caller is authenticated
-    if not authorization or not authorization.startswith("Bearer "):
-        raise HTTPException(status_code=401, detail="Missing or invalid token")
-    access_token = authorization.split(" ", 1)[1]
-    ID_LOD2 = data["ID_LOD2"]
-    update_building_data(ID_LOD2, access_token, data)
-    return
-
-if __name__ == "__main__": # Start with uvicorn main:app --reload
-    import uvicorn
-    uvicorn.run(
-        "main:app",
-        host=os.getenv('HOST', '0.0.0.0'),
-        port=int(os.getenv('PORT', 8000)),
-        reload=os.getenv('DEBUG', 'False').lower() == 'true'
-    )

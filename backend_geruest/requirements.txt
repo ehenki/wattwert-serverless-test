@@ -70,3 +70,8 @@ huggingface_hub[cli]
 decord
 psutil
 # Nutzung des Sam3 Model benötigt authentifizierung bei Hugging face
+
+# for api communication with shared backend via google cloud
+httpx
+google-auth
+google-auth-httplib2
