@@ -90,6 +90,9 @@ substitutions:
   _NEXT_PUBLIC_API_URL: "https://api.yourdomain.com" # Use a Load Balancer URL
   _BACKEND_LOD_URL: "https://wattwert-backend-xyz.a.run.app"
 
+options:
+  logging: CLOUD_LOGGING_ONLY
+
 images:
   - '$_REGION-docker.pkg.dev/$PROJECT_ID/wattwert/backend:latest'
   - '$_REGION-docker.pkg.dev/$PROJECT_ID/wattwert/backend-geruest:latest'
