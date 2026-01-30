@@ -20,7 +20,7 @@ steps:
       - 'wattwert-backend'
       - '--image=$_REGION-docker.pkg.dev/$PROJECT_ID/wattwert-serverless-test-1/backend:latest'
       - '--region=${_REGION}'
-      - '--memory=2Gi'
+      - '--memory=2Gi' # Make sure we have enough memory to build with heavy libraries
       - '--port=8000'
       - '--ingress=internal'  
       - '--no-allow-unauthenticated'
@@ -50,6 +50,7 @@ steps:
       - '--image=$_REGION-docker.pkg.dev/$PROJECT_ID/wattwert-serverless-test-1/backend-geruest:latest'
       - '--region=${_REGION}'
       - '--port=8003'
+      - '--memory=2Gi' # Make sure we have enough memory to build with heavy libraries
       - '--allow-unauthenticated'
       - '--network=default'
       - '--set-env-vars=BACKEND_LOD2_URL=${_BACKEND_LOD2_URL}'

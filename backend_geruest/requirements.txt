@@ -13,13 +13,10 @@
 
 # Installable packages:
 # For LOD2 data processing & database communication
-geopy
 utm
 requests
-shapely
 numpy
 matplotlib
-laspy[laszip]
 scikit-learn>=1.5.2
 scikit-image>=0.20
 opencv-contrib-python>=4.8.0
@@ -34,10 +31,6 @@ PyJWT
 pyproj
 python-multipart
 pandas
-plotly
-trimesh # May be responsible if docker build fails
-mapbox_earcut
-rtree
 truststore
 pip-system-certs
 
@@ -52,7 +45,6 @@ pyyaml
 tensorboard
 
 # For DIN 4108-6
-plotly
 pytest
 
 # For SAM3 (Segment Anything Model 3)

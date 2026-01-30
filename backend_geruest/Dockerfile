@@ -27,4 +27,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 EXPOSE 8003
 # Might use guvicorn - optimized for google cloud
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8003", "--workers", "2"]
+# Use shell form to allow variable expansion for $PORT
+CMD uvicorn main:app --host 0.0.0.0 --port ${PORT} --workers 2
