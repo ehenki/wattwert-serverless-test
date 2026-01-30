@@ -108,7 +108,7 @@ substitutions:
   _REGION: europe-west1
   _NEXT_PUBLIC_API_URL: "https://wattwert-backend-geruest-placeholder-url.a.run.app"
   _BACKEND_LOD2_URL: "https://wattwert-backend-1049303488847.europe-west1.run.app"
-"
+
 options:
   logging: CLOUD_LOGGING_ONLY
 
