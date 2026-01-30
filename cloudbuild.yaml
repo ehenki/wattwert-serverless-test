@@ -4,12 +4,12 @@ steps:
   # ==========================================================
   - name: 'gcr.io/cloud-builders/docker'
     id: 'build-backend'
-    args: ['build', '-t', '$_REGION-docker.pkg.dev/$PROJECT_ID/wattwert/backend:latest', '.']
+    args: ['build', '-t', '$_REGION-docker.pkg.dev/$PROJECT_ID/wattwert-serverless-test-1/backend:latest', '.']
     dir: 'backend'
 
   - name: 'gcr.io/cloud-builders/docker'
     id: 'push-backend'
-    args: ['push', '$_REGION-docker.pkg.dev/$PROJECT_ID/wattwert/backend:latest']
+    args: ['push', '$_REGION-docker.pkg.dev/$PROJECT_ID/wattwert-serverless-test-1/backend:latest']
 
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     id: 'deploy-backend'
@@ -18,10 +18,10 @@ steps:
       - 'run'
       - 'deploy'
       - 'wattwert-backend'
-      - '--image=$_REGION-docker.pkg.dev/$PROJECT_ID/wattwert/backend:latest'
+      - '--image=$_REGION-docker.pkg.dev/$PROJECT_ID/wattwert-serverless-test-1/backend:latest'
       - '--region=${_REGION}'
       - '--port=8000'
-      - '--ingress=internal'
+      - '--ingress=internal'  
       - '--no-allow-unauthenticated'
       - '--network=default'
       - '--subnet=default'
@@ -32,12 +32,12 @@ steps:
   # ==========================================================
   - name: 'gcr.io/cloud-builders/docker'
     id: 'build-geruest'
-    args: ['build', '-t', '$_REGION-docker.pkg.dev/$PROJECT_ID/wattwert/backend-geruest:latest', '.']
+    args: ['build', '-t', '$_REGION-docker.pkg.dev/$PROJECT_ID/wattwert-serverless-test-1/backend-geruest:latest', '.']
     dir: 'backend_geruest'
 
   - name: 'gcr.io/cloud-builders/docker'
     id: 'push-geruest'
-    args: ['push', '$_REGION-docker.pkg.dev/$PROJECT_ID/wattwert/backend-geruest:latest']
+    args: ['push', '$_REGION-docker.pkg.dev/$PROJECT_ID/wattwert-serverless-test-1/backend-geruest:latest']
 
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     id: 'deploy-geruest'
@@ -46,7 +46,7 @@ steps:
       - 'run'
       - 'deploy'
       - 'wattwert-backend-geruest'
-      - '--image=$_REGION-docker.pkg.dev/$PROJECT_ID/wattwert/backend-geruest:latest'
+      - '--image=$_REGION-docker.pkg.dev/$PROJECT_ID/wattwert-serverless-test-1/backend-geruest:latest'
       - '--region=${_REGION}'
       - '--port=8003'
       - '--allow-unauthenticated'
@@ -64,7 +64,7 @@ steps:
       - '-c'
       - |
         docker build \
-          -t $_REGION-docker.pkg.dev/$PROJECT_ID/wattwert/frontend:latest \
+          -t $_REGION-docker.pkg.dev/$PROJECT_ID/wattwert-serverless-test-1/frontend:latest \
           --build-arg NEXT_PUBLIC_API_URL=${_NEXT_PUBLIC_API_URL} \
           --build-arg NEXT_PUBLIC_MAPBOX_TOKEN=$$MAPBOX_TOKEN \
           --build-arg NEXT_PUBLIC_SUPABASE_URL=$$SUPABASE_URL \
@@ -76,7 +76,7 @@ steps:
 
   - name: 'gcr.io/cloud-builders/docker'
     id: 'push-frontend'
-    args: ['push', '$_REGION-docker.pkg.dev/$PROJECT_ID/wattwert/frontend:latest']
+    args: ['push', '$_REGION-docker.pkg.dev/$PROJECT_ID/wattwert-serverless-test-1/frontend:latest']
 
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     id: 'deploy-frontend'
@@ -85,7 +85,7 @@ steps:
       - 'run'
       - 'deploy'
       - 'wattwert-frontend'
-      - '--image=$_REGION-docker.pkg.dev/$PROJECT_ID/wattwert/frontend:latest'
+      - '--image=$_REGION-docker.pkg.dev/$PROJECT_ID/wattwert-serverless-test-1/frontend:latest'
       - '--region=${_REGION}'
       - '--allow-unauthenticated'
 
@@ -113,6 +113,6 @@ options:
 
 # Keep this for redundancy/documentation, though explicit pushes are now in steps
 images:
-  - '$_REGION-docker.pkg.dev/$PROJECT_ID/wattwert/backend:latest'
-  - '$_REGION-docker.pkg.dev/$PROJECT_ID/wattwert/backend-geruest:latest'
-  - '$_REGION-docker.pkg.dev/$PROJECT_ID/wattwert/frontend:latest'
+  - '$_REGION-docker.pkg.dev/$PROJECT_ID/wattwert-serverless-test-1/backend:latest'
+  - '$_REGION-docker.pkg.dev/$PROJECT_ID/wattwert-serverless-test-1/backend-geruest:latest'
+  - '$_REGION-docker.pkg.dev/$PROJECT_ID/wattwert-serverless-test-1/frontend:latest'
