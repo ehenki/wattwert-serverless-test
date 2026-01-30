@@ -11,6 +11,23 @@ FROM node:22-bookworm-slim AS builder
 WORKDIR /src
 COPY --from=deps /src/node_modules ./node_modules
 COPY . .
+
+# --- SECRETS SECTION ---
+# 1. Declare the ARGs (received from cloudbuild.yaml)
+ARG NEXT_PUBLIC_MAPBOX_TOKEN
+ARG NEXT_PUBLIC_SUPABASE_URL
+ARG NEXT_PUBLIC_SUPABASE_ANON_KEY
+ARG NEXT_RESEND_API_KEY
+ARG NEXT_PUBLIC_API_URL
+
+# 2. Map them to ENV so the 'npm run build' process can see them
+ENV NEXT_PUBLIC_MAPBOX_TOKEN=$NEXT_PUBLIC_MAPBOX_TOKEN
+ENV NEXT_PUBLIC_SUPABASE_URL=$NEXT_PUBLIC_SUPABASE_URL
+ENV NEXT_PUBLIC_SUPABASE_ANON_KEY=$NEXT_PUBLIC_SUPABASE_ANON_KEY
+ENV NEXT_RESEND_API_KEY=$NEXT_RESEND_API_KEY
+ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
+# -------------------------
+
 ENV NEXT_TELEMETRY_DISABLED=1  
 # Build a minimal runtime with standalone output
 RUN npm run build
